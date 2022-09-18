@@ -14,9 +14,6 @@ export const MoreScreen = ({ navigation }) => {
   const { onLogout } = useContext(AuthenticationContext);
   const { location } = useContext(RegionContext);
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
   return (
     <Screen style={{ alignItems: "stretch" }}>
       <Spacer height={16} />

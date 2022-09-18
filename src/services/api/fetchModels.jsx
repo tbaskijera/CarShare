@@ -1,4 +1,5 @@
 import { capitalizeString } from "@/utils/capitalizeString";
+import { API_KEY } from "@env";
 
 export const fetchModels = async (brand, year) => {
   const fetchedModels = [];
@@ -8,7 +9,7 @@ export const fetchModels = async (brand, year) => {
       `https://api.api-ninjas.com/v1/cars?limit=15&make=${brand}&year=${year}`,
       {
         headers: {
-          "X-Api-Key": "OLpKx6ETv8umz3P7i63Pdg==5KlPbLzDjaA09GwY",
+          "X-Api-Key": API_KEY,
         },
       }
     );
