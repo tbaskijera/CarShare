@@ -84,7 +84,7 @@ export const useFirebase = () => {
   };
 
   const updateReservationStatus = async (id) => {
-    const reservationRef = doc(db, "reservations", id);
+    const carRef = doc(db, "reservations", id);
     await updateDoc(carRef, {
       past: true,
     });
@@ -113,5 +113,6 @@ export const useFirebase = () => {
     createReservation,
     getCarDetails,
     updateReservationStatus,
+    updateCarRentedOut,
   };
 };
