@@ -6,7 +6,7 @@ import { useFirebase } from "@/services/firebase-crud/useFirebase";
 
 export const useServer = () => {
   const [reservations, setReservations] = useState();
-  const { updateReservationStatus } = useFirebase();
+  const { updateReservationStatus, updateCarRentedOut } = useFirebase();
 
   const check = async () => {
     const currentTime = new Date();
