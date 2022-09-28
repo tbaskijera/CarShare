@@ -51,15 +51,9 @@ export const ReservationForm = () => {
       </View>
       <Spacer height={12} />
       <View style={styles.textContainer}>
-        {currentCar.price ? (
-          <Text style={styles.text}> Price per day: ${currentCar.price}</Text>
-        ) : null}
-        {duration ? (
-          <Text style={styles.text}> Duration: {duration} days</Text>
-        ) : null}
-        {totalPrice ? (
-          <Text style={styles.text}> Total price is: ${totalPrice}</Text>
-        ) : null}
+        <Text style={styles.text}> Price per day: ${currentCar.price}</Text>
+        <Text style={styles.text}> Duration: {duration} days</Text>
+        <Text style={styles.text}> Total price is: ${totalPrice}</Text>
       </View>
       <Spacer height={16} />
       <Button
@@ -73,7 +67,9 @@ export const ReservationForm = () => {
             totalPrice: totalPrice,
           };
           await createReservation(reservation);
-          navigation.goBack();
+          navigation.navigate("HiddenTabsStack", {
+            screen: "ReserveConfirmationScreen",
+          });
         }}
         loading={isLoading}
       >

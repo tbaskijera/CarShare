@@ -1,24 +1,10 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
-import { Button } from "@/components/Button";
-import RNDateTimePicker from "@react-native-community/datetimepicker";
-import moment from "moment";
-import { AuthenticationContext } from "@/services/authentication/AuthenticationContext";
-import { Screen } from "@/components/Screen";
 import { CarContext } from "@/context/CarContext";
 import { doc, setDoc, addDoc, getDoc } from "firebase/firestore";
-import { collection } from "firebase/firestore";
 import { db } from "@/firebase-config";
-import { TextInput } from "@/components/TextInput";
-import { DatePicker } from "@/components/DatePicker";
-import { Spacer } from "@/components/Spacer";
 
 import { useNavigation } from "@react-navigation/native";
-import {
-  dateDaysDiff,
-  dateDaysHoursDiff,
-  dateTimeDayLeft,
-} from "@/utils/dateDifference";
+import { dateDaysDiff } from "@/utils/dateDifference";
 
 export const useReservationForm = () => {
   const [duration, setDuration] = useState(1);
@@ -35,16 +21,14 @@ export const useReservationForm = () => {
   const navigation = useNavigation();
 
   const onChangeStart = (event, selectedDate) => {
-    const currentDate = selectedDate;
     setShowStartPicker(false);
-    setStartDate(currentDate);
-    console.log(currentDate);
+    setStartDate(selectedDate);
   };
 
   const onChangeEnd = (event, selectedDate) => {
-    const currentDate = selectedDate;
     setShowEndPicker(false);
-    setEndDate(currentDate);
+    selectedDate.setUTCHours(21, 59, 59, 59);
+    setEndDate(selectedDate);
   };
 
   const handleStartPicker = () => {
@@ -55,9 +39,15 @@ export const useReservationForm = () => {
   };
 
   useEffect(() => {
-    if (startDate > endDate) setEndDate(startDate);
-    const diffDays = dateDaysDiff(startDate, endDate);
-    setDuration(diffDays + 1);
+    if (startDate > endDate) {
+      const tmpDate = new Date(startDate.getTime());
+      tmpDate.setUTCHours(21, 59, 59, 59);
+      setEndDate(tmpDate);
+    }
+    if (startDate.getTime() != endDate.getTime()) {
+      const diffDays = dateDaysDiff(startDate, endDate);
+      setDuration(diffDays);
+    }
   }, [startDate, endDate]);
 
   useEffect(() => {
