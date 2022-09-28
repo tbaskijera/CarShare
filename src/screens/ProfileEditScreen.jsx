@@ -60,6 +60,7 @@ export const ProfileEditScreen = ({ navigation }) => {
 
       <Button
         loading={isLoading}
+        disabled={!(!!userData.name && !!userData.surname)}
         onPress={async () => {
           await submitChanges(name, blob);
           navigation.goBack();
