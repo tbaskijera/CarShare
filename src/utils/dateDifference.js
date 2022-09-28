@@ -12,3 +12,8 @@ export const dateDaysHoursDiff = (endDate) => {
   const diffHrs = Math.floor((diff % 86400000) / 3600000); // hours
   return `${diffDays} days ${diffHrs} hours`;
 };
+
+export const addDay = (date, n) => {
+  date.setDate(date.getDate() + n);
+  return date;
+};
