@@ -1,5 +1,7 @@
 import { useOwnerCard } from "@/features/owner-card/owner-card.hook";
+import { colorBackground } from "@/style/colors";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 
 export const OwnerCard = () => {
   const { owner } = useOwnerCard();
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     height: 60,
     justifyContent: "center",
     borderRadius: 50,
-    backgroundColor: "orange",
+    backgroundColor: colorBackground,
     overflow: "hidden",
   },
 
