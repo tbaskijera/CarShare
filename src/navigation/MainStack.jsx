@@ -10,6 +10,7 @@ import { SearchScreen } from "@/screens/SearchScreen";
 import { MapScreen } from "@/screens/MapScreen";
 import { HostScreen } from "@/screens/HostScreen";
 import { MoreScreen } from "@/screens/MoreScreen";
+import { ReserveConfirmationScreen } from "@/screens/ReserveConfirmationScreen";
 
 import { CarCreateUpdateScreen } from "@/screens/CarCreateUpdateScreen";
 import { LocationSelectScreen } from "@/screens/LocationSelectScreen";
@@ -80,6 +81,13 @@ const HiddenTabsStack = ({ navigation }) => {
         name="ReservationsScreen"
         component={ReservationsScreen}
         options={{ title: "Your reservations" }}
+      />
+      <SubStack.Screen
+        name="ReserveConfirmationScreen"
+        component={ReserveConfirmationScreen}
+        options={{
+          headerShown: false,
+        }}
       />
     </SubStack.Navigator>
   );
