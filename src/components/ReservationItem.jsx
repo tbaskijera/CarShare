@@ -15,6 +15,18 @@ export const ReservationItem = ({ reservation }) => {
   const { getCarDetails } = useFirebase();
   const [car, setCar] = useState();
 
+  const getReservationStatus = () => {
+    if (reservation.past) {
+      return `Paid $${reservation.totalPrice}`;
+    }
+
+    if (reservation.startDate.toDate() > new Date()) {
+      return `Starts in: ${dateDaysHoursDiff(reservation.startDate.toDate())}`;
+    }
+
+    return `Time left: ${dateDaysHoursDiff(reservation.endDate.toDate())}`;
+  };
+
   useEffect(() => {
     (async () => {
       const details = await getCarDetails(reservation.carId);
@@ -26,11 +38,7 @@ export const ReservationItem = ({ reservation }) => {
       {car ? (
         <List.Item
           title={`${car.brand} ${car.model} ${car.year}`}
-          description={
-            reservation.past
-              ? `Paid $${reservation.totalPrice}`
-              : `Time left: ${dateDaysHoursDiff(reservation.endDate.toDate())}`
-          }
+          description={getReservationStatus()}
           borderless={true}
           titleStyle={{ color: colorAccent }}
           descriptionStyle={{
@@ -47,4 +55,3 @@ export const ReservationItem = ({ reservation }) => {
     </>
   );
 };
-const styles = StyleSheet.create({});
